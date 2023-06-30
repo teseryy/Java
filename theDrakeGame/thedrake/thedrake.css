@@ -1,0 +1,21 @@
+Button{
+    -fx-background-color: rgba(77, 76, 74, 0.8);
+    -fx-text-fill: white;
+    -fx-font-family: "URW Gothic L";
+    -fx-pref-width: 170;
+    -fx-max-height: 9999;
+    -fx-max-width: 9999;
+}
+
+Button:hover{
+    -fx-background-color: rgba(112, 110, 110, 0.8);
+}
+
+Button:pressed{
+    -fx-background-color: rgba(77, 76, 74, 0.8);
+}
+
+#BorderPane {
+    -fx-background-image: url("thedrakebackground.jpg");
+    -fx-background-size: 100% 100%;
+}
