@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Films</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Director</th>
+            <th>Date of Release</th>
+            <th>Budget</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="film: ${allFilms}">
+            <td th:text="${film.title}">Title</td>
+            <td th:text="${film.duration} + ' minutes'">Duration</td>
+            <td th:text="${film.director}">Director</td>
+            <td th:text="${#dates.format(film.dateOfRelease, 'dd.MM.yyyy')}">Date of release</td>
+            <td th:text="${film.budget} + ' millions' ">Budget</td>
+            <td th:text="${film.country}">Country</td>
+            <td>
+                <form th:action="@{/films/edit}" method="get">
+                    <input type="hidden" th:name="id" th:value="${film.id}">
+                    <button type="submit">edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/films/' + ${film.id} + '/reviews'" method="get">
+                    <button type="submit">reviews</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/films/' + ${film.id} + '/actors'" method="get">
+                    <button type="submit">actors</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/films/delete/' + ${film.id}" method="post">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/films/create" method="get">
+        <button type="submit">Create New Film</button>
+    </form>
+    <form th:action="@{/films/rating}" method="get">
+        <button type="submit">Films with high rating</button>
+    </form>
+</main>
+</body>
+</html>

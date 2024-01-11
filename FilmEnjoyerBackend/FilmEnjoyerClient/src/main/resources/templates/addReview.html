@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <h1>Create review</h1>
+    <form method="post" th:action="@{'/films/' + ${id} + '/reviews/create'}" th:object="${review}">
+        <div>
+            <label for="reviewText">Review text: </label>
+            <input th:field="*{reviewText}" type="text" id="reviewText"/>
+            <label for="rating">Rating: </label>
+            <input th:field="*{rating}" type="number" id="rating" min="1" max="10"/>
+            <label for="username">Username: </label>
+            <input th:field="*{author}" type="text" id="username"/>
+        </div>
+        <input type="submit"/><input type="reset"/>
+    </form>
+</main>
+</body>
+</html>

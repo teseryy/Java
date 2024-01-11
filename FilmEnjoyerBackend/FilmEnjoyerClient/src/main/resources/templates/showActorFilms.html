@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Films with actor</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Director</th>
+            <th>Date of Release</th>
+            <th>Budget</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="film: ${actorFilms}">
+            <td th:text="${film.title}">Title</td>
+            <td th:text="${film.duration} + ' minutes'">Duration</td>
+            <td th:text="${film.director}">Director</td>
+            <td th:text="${#dates.format(film.dateOfRelease, 'dd.MM.yyyy')}">Date of release</td>
+            <td th:text="${film.budget} + ' millions' ">Budget</td>
+            <td th:text="${film.country}">Country</td>
+            <td>
+                <form th:action="'/actors/' + ${id} + '/films/delete/' + ${film.id}" method="post">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

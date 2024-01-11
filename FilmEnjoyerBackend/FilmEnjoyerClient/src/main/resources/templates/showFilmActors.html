@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Actors</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Date of birth</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="actor: ${filmActors}">
+            <td th:text="${actor.name}">Name</td>
+            <td th:text="${actor.surname}">Surname</td>
+            <td th:text="${#dates.format(actor.dateOfBirth, 'dd.MM.yyyy')}">Date of birth</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

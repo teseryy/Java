@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Actors</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Date of birth</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="actor: ${allActors}">
+            <td th:text="${actor.name}">Name</td>
+            <td th:text="${actor.surname}">Surname</td>
+            <td th:text="${#dates.format(actor.dateOfBirth, 'dd.MM.yyyy')}">Date of birth</td>
+            <td>
+                <form th:action="@{/actors/edit}" method="get">
+                    <input type="hidden" th:name="id" th:value="${actor.id}">
+                    <button type="submit">edit</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/actors/delete/' + ${actor.id}" method="post">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/actors/' + ${actor.id} + '/films'" method="get">
+                    <button type="submit">show actor's films</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="'/actors/' + ${actor.id} + '/allFilms'" method="get">
+                    <button type="submit">add film to actor</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/actors/create" method="get">
+        <button type="submit">Create New Actor</button>
+    </form>
+</main>
+</body>
+</html>
+
