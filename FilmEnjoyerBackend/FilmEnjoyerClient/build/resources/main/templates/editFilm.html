@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+  <a href="/">Welcome</a> |
+  <a href="/users">User management</a> |
+  <a href="/films">Films</a> |
+  <a href="/actors">Actors</a>
+</nav>
+<main>
+  <h1>Edit film</h1>
+  <form method="post" th:action="@{/films/edit}" th:object="${film}">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:each="id : ${film.reviewIds}" th:field="*{reviewIds}" th:value="${id}"/>
+    <input type="hidden" th:each="id : ${film.actorIds}" th:field="*{actorIds}" th:value="${id}"/>
+    <div>
+      <label for="title">Title: </label>
+      <input th:field="*{title}" type="text" id="title"/>
+      <label for="duration">Duration: </label>
+      <input th:field="*{duration}" type="number" id="duration"/>
+      <label for="director">Director: </label>
+      <input th:field="*{director}" type="text" id="director"/>
+      <label for="dateOfRelease">Date of release: </label>
+      <input th:field="*{dateOfRelease}" type="date" id="dateOfRelease"/>
+      <label for="budget">Budget: </label>
+      <input th:field="*{budget}" type="number" id="budget"/>
+      <label for="country">Country: </label>
+      <input th:field="*{country}" type="text" id="country"/>
+    </div>
+    <input type="submit"/><input type="reset"/>
+  </form>
+</main>
+</body>
+</html>

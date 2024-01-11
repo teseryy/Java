@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <div th:if="${error}">
+        <span>ERROR</span>
+    </div>
+    <h1>Reviews</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Author</th>
+            <th>Review text</th>
+            <th>Rating</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="review: ${userReviews}">
+            <td th:text="${review.author}">Author</td>
+            <td th:text="${review.reviewText}">Review text</td>
+            <td th:text="${review.rating}">Rating</td>
+            <td th:text="${#dates.format(review.date, 'dd.MM.yyyy')}">Date</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

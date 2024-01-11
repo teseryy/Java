@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FilmEnjoyer</title>
+</head>
+<body>
+<nav>
+    <a href="/">Welcome</a> |
+    <a href="/users">User management</a> |
+    <a href="/films">Films</a> |
+    <a href="/actors">Actors</a>
+</nav>
+<main>
+    <h1>Create actor</h1>
+    <form method="post" th:action="@{/actors/create}" th:object="${actor}">
+        <div>
+            <label for="name">Name: </label>
+            <input th:field="*{name}" type="text" id="name"/>
+            <label for="surname">Surname: </label>
+            <input th:field="*{surname}" type="text" id="surname"/>
+            <label for="dateOfBirth">Date of birth: </label>
+            <input th:field="*{dateOfBirth}" type="date" id="dateOfBirth"/>
+        </div>
+        <input type="submit"/><input type="reset"/>
+    </form>
+</main>
+</body>
+</html>
